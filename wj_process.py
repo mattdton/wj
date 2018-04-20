@@ -1,3 +1,4 @@
+import wj_util as wj
 import sys,os
 import datetime
 from argparse import ArgumentParser
@@ -50,8 +51,8 @@ def printYesterdayEntries():
 
 def main():
     print('Opening %s'%fname)
-
-    args = parse_args()
+    dateDict = wj.readFile(fname)
+    print(dateDict)
 
 if __name__ == '__main__':
     main()
