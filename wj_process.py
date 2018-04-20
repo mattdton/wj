@@ -20,7 +20,7 @@ def parse_args():
 
     tag_parser = subparsers.add_parser('tag',
                                       help='Print entries for a given tag.')
-    tag_parser.add_argument('tagID',
+    tag_parser.add_argument('tag',
                             action='store',
                             type=str,
                             help='tag to print')
@@ -41,14 +41,19 @@ def addEntry(args,dateDict):
     wj.addNewEntry(args.entry,dateDict)
     return dateDict
 
-def printTagEntries():
-    return
+def printTagEntries(args,dateDict):
+    wj.printEntriesWithTag(args.tag,dateDict)
+    return dateDict
 
-def printTodayEntries():
-    return
+def printTodayEntries(args,dateDict):
+    date = datetime.date.today()
+    wj.printEntriesForDate(date.isoformat(),dateDict)
+    return dateDict
 
-def printYesterdayEntries():
-    return
+def printYesterdayEntries(args,dateDict):
+    date = datetime.date.today() - datetime.timedelta(1)
+    wj.printEntriesForDate(date.isoformat(),dateDict)
+    return dateDict
 
 def main():
     print('Opening %s'%fname)

@@ -48,3 +48,20 @@ def addNewEntry(entry,dateDict):
         dateDict[today] = []
     tags = getTagsFromEntry(bothSides[1])
     dateDict[today].append((bothSides[0],tags))
+
+def printEntriesWithTag(tag,dateDict):
+    tmpDict = {}
+    for date,val in dateDict.items():
+        for entry,tags in val:
+            if tag in tags:
+                if date not in tmpDict.keys():
+                    tmpDict[date] = []
+                tmpDict[date].append(entry)
+    for date in sorted(tmpDict):
+        for entry in tmpDict[date]:
+            print(date+' '+entry+'.')
+
+def printEntriesForDate(date,dateDict):
+    if date in dateDict.keys():
+        for (entry,tags) in dateDict[date]:
+            print('- '+entry+'.'+tags2str(tags))
