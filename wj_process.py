@@ -37,8 +37,9 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-def addEntry():
-    return
+def addEntry(args,dateDict):
+    wj.addNewEntry(args.entry,dateDict)
+    return dateDict
 
 def printTagEntries():
     return
@@ -52,6 +53,11 @@ def printYesterdayEntries():
 def main():
     print('Opening %s'%fname)
     dateDict = wj.readFile(fname)
+
+    args = parse_args()
+    dateDict = args.func(args,dateDict)
+
+    wj.writeFile('testing.journal',dateDict)
 
 if __name__ == '__main__':
     main()
