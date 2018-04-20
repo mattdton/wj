@@ -52,7 +52,6 @@ def printYesterdayEntries():
 def main():
     print('Opening %s'%fname)
     dateDict = wj.readFile(fname)
-    print(dateDict)
 
 if __name__ == '__main__':
     main()

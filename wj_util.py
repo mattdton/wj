@@ -23,3 +23,16 @@ def readFile(fname):
                 dateDict[lastDate].append((bothSides[0],tags))
     return dateDict
 
+def tags2str(tags):
+    str = ''
+    for tag in tags:
+        str = str + ' @'+tag
+    return str
+
+def writeFile(fname,dateDict):
+    with open(fname,'w') as f:
+        for date in sorted(dateDict.keys()):
+            print(date+'\n',file=f)
+            for (entry,tags) in dateDict[date]:
+                print('- '+entry+'.'+tags2str(tags),file=f)
+            print(file=f)
