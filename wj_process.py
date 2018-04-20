@@ -39,30 +39,29 @@ def parse_args():
 
 def addEntry(args,dateDict):
     wj.addNewEntry(args.entry,dateDict)
-    return dateDict
+    wj.writeFile(fname,dateDict)
+    return
 
 def printTagEntries(args,dateDict):
     wj.printEntriesWithTag(args.tag,dateDict)
-    return dateDict
+    return
 
 def printTodayEntries(args,dateDict):
     date = datetime.date.today()
     wj.printEntriesForDate(date.isoformat(),dateDict)
-    return dateDict
+    return
 
 def printYesterdayEntries(args,dateDict):
     date = datetime.date.today() - datetime.timedelta(1)
     wj.printEntriesForDate(date.isoformat(),dateDict)
-    return dateDict
+    return
 
 def main():
     print('Opening %s'%fname)
     dateDict = wj.readFile(fname)
 
     args = parse_args()
-    dateDict = args.func(args,dateDict)
-
-    wj.writeFile('testing.journal',dateDict)
+    args.func(args,dateDict)
 
 if __name__ == '__main__':
     main()
