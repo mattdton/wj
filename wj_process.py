@@ -18,6 +18,10 @@ def parse_args():
                             help="New entry in the form: 'Sentence. @tag1 @tag2'")
     add_parser.set_defaults(func=addEntry)
 
+    tags_parser = subparsers.add_parser('tags',
+                                        help='Print the list of used tags.')
+    tags_parser.set_defaults(func=printTags)
+
     tag_parser = subparsers.add_parser('tag',
                                       help='Print entries for a given tag.')
     tag_parser.add_argument('tag',
@@ -40,6 +44,10 @@ def parse_args():
 def addEntry(args,dateDict):
     wj.addNewEntry(args.entry,dateDict)
     wj.writeFile(fname,dateDict)
+    return
+
+def printTags(args,dateDict):
+    wj.printTags(dateDict)
     return
 
 def printTagEntries(args,dateDict):

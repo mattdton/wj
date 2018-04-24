@@ -45,3 +45,7 @@ Everything that you've done today:
 Everything that you did yesterday:
 
     wj yesterday
+
+Print a list of tags:
+
+    wj tags

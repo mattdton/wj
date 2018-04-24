@@ -1,5 +1,6 @@
 import re
 import datetime
+from collections import Counter
 
 def getTagsFromEntry(string):
     tags = string.replace(' ','').lstrip('@').split('@')
@@ -48,6 +49,19 @@ def addNewEntry(entry,dateDict):
         dateDict[today] = []
     tags = getTagsFromEntry(bothSides[1])
     dateDict[today].append((bothSides[0],tags))
+
+def countTags(dateDict):
+    c = Counter()
+    for date,val in dateDict.items():
+        for entry,tags in val:
+            for tag in tags:
+                c[tag] += 1
+    return c
+
+def printTags(dateDict):
+    tags = countTags(dateDict)
+    for tag in tags.keys():
+        print(tag)
 
 def printEntriesWithTag(tag,dateDict):
     tmpDict = {}
