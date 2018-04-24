@@ -60,8 +60,9 @@ def countTags(dateDict):
 
 def printTags(dateDict):
     tags = countTags(dateDict)
+    print('File contains entries which use the following tags:')
     for tag in tags.keys():
-        print(tag)
+        print('    '+tag)
 
 def printEntriesWithTag(tag,dateDict):
     tmpDict = {}
