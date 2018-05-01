@@ -38,6 +38,10 @@ All entries with a particular tag:
 
     wj tag research
 
+Everything for the last two weeks:
+
+    wj recent
+
 Everything that you've done today:
 
     wj today
@@ -49,3 +53,4 @@ Everything that you did yesterday:
 Print a list of tags:
 
     wj tags
+
