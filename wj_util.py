@@ -80,3 +80,13 @@ def printEntriesForDate(date,dateDict):
     if date in dateDict.keys():
         for (entry,tags) in dateDict[date]:
             print('- '+entry+'.'+tags2str(tags))
+
+def printDateRange(startDate,endDate,dateDict):
+    d = startDate
+    delta = datetime.timedelta(days=1)
+    while d <= endDate:
+        if d.isoformat() in dateDict.keys():
+            print(d.isoformat())
+            printEntriesForDate(d.isoformat(),dateDict)
+            print()
+        d+=delta

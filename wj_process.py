@@ -30,6 +30,10 @@ def parse_args():
                             help='tag to print')
     tag_parser.set_defaults(func=printTagEntries)
 
+    recent_parser = subparsers.add_parser('recent',
+                                          help='Print entries for last fortnight.')
+    recent_parser.set_defaults(func=printRecent)
+
     today_parser = subparsers.add_parser('today',
                                          help='Print entries for today.')
     today_parser.set_defaults(func=printTodayEntries)
@@ -53,6 +57,12 @@ def printTags(args,dateDict):
 def printTagEntries(args,dateDict):
     wj.printEntriesWithTag(args.tag,dateDict)
     return
+
+def printRecent(args,dateDict):
+    delta=datetime.timedelta(days=-14)
+    endDate = datetime.date.today()
+    startDate = endDate+delta
+    wj.printDateRange(startDate,endDate,dateDict)
 
 def printTodayEntries(args,dateDict):
     date = datetime.date.today()
