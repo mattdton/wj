@@ -1,7 +1,7 @@
 from setuptools import setup
-
+from wj import __version__
 setup(name='wj',
-      version='0.1',
+      version=__version__,
       description='Tool for adding to and querying plain text task tracking files.',
       url='https://github.com/tdm-dev/wj',
       scripts=['scripts/wj'],

@@ -26,13 +26,31 @@ So a file might look like:
 The python package provides a simple command line interface that can
 be used to add entries and produce reports on these files.
 
-## Adding entries
+To get a list of available commands call with `--help`:
+
+    > wj --help
+    usage: wj [-h] {add,tags,tag,recent,today,yesterday} ...
+    
+    positional arguments:
+      {add,tags,tag,recent,today,yesterday}
+                            commands
+        add                 Add a new entry for today.
+        tags                Print the list of used tags.
+        tag                 Print entries for a given tag.
+        recent              Print entries for last fortnight.
+        today               Print entries for today.
+        yesterday           Print entries for yesterday.
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+
+### Adding entries
 
 Use `add`:
 
     wj add 'Worked on paper. @research'
 
-## Producing simple reports
+### Producing simple reports
 
 All entries with a particular tag:
 
