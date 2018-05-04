@@ -1,17 +1,18 @@
 # wj
 
-`wj` is a simple tool for keeping track of task progress. All entries
-are stored in a plain text file, so they can easily be read or edited
-and are grouped by date.
+`wj` is a simple tool for keeping track of progress on different
+tasks. All entries are stored in a plain text file that's kept in a
+central place. Entries are grouped by date so they can easily be read
+or edited.
 
-The format is simple:
+The format of the file is simple:
 
 1. Dates are in YYYY-MM-DD format on a single line starting at the
    first character.
 
 2. Entries start with "- " are followed by a *single* sentence which
-   ends in a full stop and can have any number of tags (which start
-   with an @).
+   ends in a full stop. They can be followed by any number of tags
+   starting with an @.
 
 So a file might look like:
 
@@ -24,9 +25,22 @@ So a file might look like:
     - Fixed the README file. @opensource
 
 The python package provides a simple command line interface that can
-be used to add entries and produce reports on these files.
+be used to add entries and produce basic reports.
 
-To get a list of available commands call with `--help`:
+### Installing and using
+
+To install, clone the repository and use pip:
+
+    git clone git@github.com:tdm-dev/wj.git
+    cd wj
+    pip install .
+    
+`wj` uses an environment variable to find the journal. To set this
+with bash call:
+
+    export WJ_FILENAME=<path-to-journal>
+
+To get a list of available commands call `wj --help` or `wj -h`:
 
     > wj --help
     usage: wj [-h] {add,tags,tag,recent,today,yesterday} ...
