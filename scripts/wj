@@ -1,4 +1,5 @@
-import wj_util as wj
+#!/usr/bin/python
+import wj.wj_util as wj
 import sys,os
 import datetime
 from argparse import ArgumentParser
