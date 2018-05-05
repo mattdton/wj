@@ -35,6 +35,14 @@ def parse_args():
                                           help='Print entries for last fortnight.')
     recent_parser.set_defaults(func=printRecent)
 
+    effort_parser = subparsers.add_parser('effort',
+                                          help='Print the effort associated with a tag.')
+    effort_parser.add_argument('tag',
+                               action='store',
+                               type=str,
+                               help='tag to sum over')
+    effort_parser.set_defaults(func=printEffort)
+
     today_parser = subparsers.add_parser('today',
                                          help='Print entries for today.')
     today_parser.set_defaults(func=printTodayEntries)
@@ -57,6 +65,10 @@ def printTags(args,dateDict):
 
 def printTagEntries(args,dateDict):
     wj.printEntriesWithTag(args.tag,dateDict)
+    return
+
+def printEffort(args,dateDict):
+    wj.printTotalEffort(args.tag,dateDict)
     return
 
 def printRecent(args,dateDict):

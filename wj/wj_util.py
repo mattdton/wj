@@ -1,6 +1,7 @@
 import re
 import datetime
 from collections import Counter
+from . import ureg
 
 def getTagsFromEntry(string):
     tags = string.replace(' ','').lstrip('@').split('@')
@@ -75,6 +76,22 @@ def printEntriesWithTag(tag,dateDict):
     for date in sorted(tmpDict):
         for entry in tmpDict[date]:
             print(date+' '+entry+'.')
+
+def printTotalEffort(tag,dateDict):
+    total = None
+    for date,val in dateDict.items():
+        for entry,tags in val:
+            if tag in tags:
+                splitEntry = entry.split(';')
+                if len(splitEntry)==2:
+                    if total is None:
+                        total = ureg(splitEntry[1])
+                    else:
+                        total += ureg(splitEntry[1])
+    if total.dimensionality=={'[time]':1.0}:
+        print('{0:.2f} '.format(total))
+    else:
+        print(total)
 
 def printEntriesForDate(date,dateDict):
     if date in dateDict.keys():
