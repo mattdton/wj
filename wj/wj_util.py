@@ -1,7 +1,8 @@
 import re
 import datetime
 from collections import Counter
-from . import ureg
+from pint import UnitRegistry
+ureg = UnitRegistry()
 
 def getTagsFromEntry(string):
     tags = string.replace(' ','').lstrip('@').split('@')

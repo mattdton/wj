@@ -7,5 +7,6 @@ setup(name='wj',
       scripts=['scripts/wj'],
       author='Matthew Downton',
       license='MIT',
-      packages=['wj'])
+      packages=['wj'],
+      install_requires=['pint'])
       
