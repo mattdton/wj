@@ -87,10 +87,10 @@ def printEntriesWithTag(tag,dateDict):
             if tag in tags:
                 if date not in tmpDict.keys():
                     tmpDict[date] = []
-                tmpDict[date].append(entry)
+                tmpDict[date].append((entry,tags))
     for date in sorted(tmpDict):
-        for entry in tmpDict[date]:
-            print(date+' '+entry+'.')
+        for entry,tags in tmpDict[date]:
+            print(date+' '+entry+'.'+_tags2str(tags))
 
 def printTotalEffort(tag,dateDict):
     """Print the total effort put into the task with a given tag."""
