@@ -31,6 +31,15 @@ def parse_args():
                             help='tag to print')
     tag_parser.set_defaults(func=printTagEntries)
 
+    cal_parser = subparsers.add_parser('cal',
+                                       help='Print a calendar showing dates which have entries for a tag.')
+    cal_parser.add_argument('tag',
+                            action='store',
+                            type=str,
+                            help='tag to show')
+    cal_parser.set_defaults(func=printCal)
+
+
     recent_parser = subparsers.add_parser('recent',
                                           help='Print entries for last fortnight.')
     recent_parser.set_defaults(func=printRecent)
@@ -62,6 +71,9 @@ def addEntry(args,dateDict):
 def printTags(args,dateDict):
     wj.printTags(dateDict)
     return
+
+def printCal(args,dateDict):
+    wj.printCal(args.tag,dateDict)
 
 def printTagEntries(args,dateDict):
     wj.printEntriesWithTag(args.tag,dateDict)

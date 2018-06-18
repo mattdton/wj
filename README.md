@@ -47,21 +47,23 @@ with bash call:
 To get a list of available commands call `wj --help` or `wj -h`:
 
     > wj --help
-    usage: wj [-h] {add,tags,tag,recent,today,yesterday} ...
-    
+    usage: wj [-h] {add,tags,tag,cal,recent,effort,today,yesterday} ...
+
     positional arguments:
-      {add,tags,tag,recent,today,yesterday}
+    {add,tags,tag,cal,recent,effort,today,yesterday}
                             commands
         add                 Add a new entry for today.
         tags                Print the list of used tags.
         tag                 Print entries for a given tag.
+        cal                 Print a calendar showing dates which have entries for
+                            a tag.
         recent              Print entries for last fortnight.
         effort              Print the effort associated with a tag.
         today               Print entries for today.
         yesterday           Print entries for yesterday.
-    
+
     optional arguments:
-      -h, --help            show this help message and exit
+    -h, --help            show this help message and exit
 
 ### Adding entries
 
@@ -94,3 +96,7 @@ Print a list of tags:
 Print the total effort associated with a tag:
 
     wj effort running
+
+Display a calendar that shows dates which have an entry for a tag:
+
+    wj cal running

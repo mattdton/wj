@@ -22,19 +22,22 @@ def _month2str(year,month,dates=set()):
     inc = datetime.timedelta(days=1)
     offset = (date.isoweekday()-1)*3
     out = offset*' '
+    addedChars = offset
     while date.month == month:
         if date in dates:
             out = out + Escape.BEGIN.value+'{0: >3}'.format(date.day)+Escape.END.value
         else:
             out = out + '{0: >3}'.format(date.day)
-        if date.isoweekday()==7:
+        addedChars = addedChars + 3
+        if addedChars == 21:
             out = out + '\n'
+            addedChars=0
         date = date + inc
+    out = out + (21-addedChars)*' '
     return out
 
 def _chopMonthString(s):
-    t = s.split('\n')
-    out = ['{0:<21}'.format(i) for i in t]
+    out = s.split('\n')
     while len(out) < 6:
         out = out + [21*' ']
     return out
