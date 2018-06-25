@@ -24,14 +24,17 @@ contains the journal entries.
 
     """
     dateDict = {}
-    dateRE = re.compile('\d\d\d\d-\d\d-\d\d')
+    dateRE = re.compile('(?P<year>\d\d\d\d)-(?P<month>\d\d)-(?P<day>\d\d)')
+    tagRE = re.compile('\B@(\w+)')
     entryRE = re.compile('\A- ')
     with open(fname,'r') as f:
         for line in f:
             l = line.rstrip()
-            if dateRE.match(l):
-                dateDict[l] = []
-                lastDate = l
+            dateMatch = dateRE.match(l)
+            if dateMatch:
+                d = datetime.date(int(dateMatch.group('year')),int(dateMatch.group('month')),int(dateMatch.group('day')))
+                dateDict[d] = []
+                lastDate = d
             if entryRE.match(l):
                 bothSides = l.strip('- ').split('.')
                 tags = _getTagsFromEntry(bothSides[1])
@@ -42,19 +45,14 @@ def writeFile(fname,dateDict):
     """Saves the journal entries in a plain text format to 'fname'."""
     with open(fname,'w') as f:
         for date in sorted(dateDict.keys()):
-            print(date+'\n',file=f)
+            print(date.isoformat()+'\n',file=f)
             for (entry,tags) in dateDict[date]:
                 print('- '+entry+'.'+_tags2str(tags),file=f)
             print(file=f)
 
-def addNewEntry(entry,dateDict,date=datetime.date.today().isoformat()):
+def addNewEntry(entry,dateDict,date=datetime.date.today()):
     """Add a new entry to the journal for a particular date. If no date
-is given, today's date is used. The date should be in the format
-YYYY-MM-DD."""
-    dateRE = re.compile('\d\d\d\d-\d\d-\d\d')
-    if not dateRE.match(date):
-        print("Date not in correct format.")
-        return
+is given, today's date is used."""
     bothSides = entry.split('.')
     if(len(bothSides)==1):
         print("Can't split on full stop.")
@@ -98,8 +96,7 @@ def printCal(tag,dateDict):
     for date,val in dateDict.items():
         for entry,tags in val:
             if tag in tags:
-                dp = date.split('-')
-                dateSet.add(datetime.date(int(dp[0]),int(dp[1]),int(dp[2])))
+                dateSet.add(date)
     wj.cal.printYear(year,dateSet)
 
 def printTotalEffort(tag,dateDict):
@@ -120,8 +117,7 @@ def printTotalEffort(tag,dateDict):
         print(total)
 
 def printEntriesForDate(date,dateDict):
-    """Print the journal entries for a particular date. The date is in the
-format YYYY-MM-DD."""
+    """Print the journal entries for a particular date."""
     if date in dateDict.keys():
         for (entry,tags) in dateDict[date]:
             print('- '+entry+'.'+_tags2str(tags))
@@ -132,8 +128,8 @@ end dates are in datetime format."""
     d = startDate
     delta = datetime.timedelta(days=1)
     while d <= endDate:
-        if d.isoformat() in dateDict.keys():
+        if d in dateDict.keys():
             print(d.isoformat())
-            printEntriesForDate(d.isoformat(),dateDict)
+            printEntriesForDate(d,dateDict)
             print()
         d+=delta

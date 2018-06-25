@@ -91,12 +91,12 @@ def printRecent(args,dateDict):
 
 def printTodayEntries(args,dateDict):
     date = datetime.date.today()
-    wj.printEntriesForDate(date.isoformat(),dateDict)
+    wj.printEntriesForDate(date,dateDict)
     return
 
 def printYesterdayEntries(args,dateDict):
     date = datetime.date.today() - datetime.timedelta(1)
-    wj.printEntriesForDate(date.isoformat(),dateDict)
+    wj.printEntriesForDate(date,dateDict)
     return
 
 def main():
