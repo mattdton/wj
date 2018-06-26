@@ -88,7 +88,7 @@ def printEntriesWithTag(tag,dateDict):
                 tmpDict[date].append((entry,tags))
     for date in sorted(tmpDict):
         for entry,tags in tmpDict[date]:
-            print(date+' '+entry+'.'+_tags2str(tags))
+            print(date.isoformat()+' '+entry+'.'+_tags2str(tags))
 
 def printCal(tag,dateDict):
     year = datetime.date.today().year
