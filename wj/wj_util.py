@@ -70,12 +70,27 @@ def _countTags(dateDict):
                 c[tag] += 1
     return c
 
+def _countEntries(dateDict):
+    nentry = 0
+    for date,val in dateDict.items():
+        for entry,tags in val:
+            nentry = nentry + 1
+    return nentry
+
 def printTags(dateDict):
     """Print a list of all the tags used within the journal."""
     tags = _countTags(dateDict)
-    print('File contains entries which use the following tags:')
-    for tag in tags.keys():
+    print('The following tags are used:')
+    for tag,count in tags.most_common():
         print('    '+tag)
+
+def printSummary(dateDict):
+    """Print a short summary of the journal."""
+    nentry = _countEntries(dateDict)
+    l = list(dateDict.keys())
+    l.sort()
+    print('File contains {} entries from {} to {}.'.format(nentry,l[0].isoformat(),l[len(l)-1].isoformat()))
+    printTags(dateDict)
 
 def printEntriesWithTag(tag,dateDict):
     """Print all the journal entries that use a given tag."""

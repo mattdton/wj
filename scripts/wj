@@ -23,6 +23,10 @@ def parse_args():
                                         help='Print the list of used tags.')
     tags_parser.set_defaults(func=printTags)
 
+    summary_parser = subparsers.add_parser('summary',
+                                        help='Print a short summary of the journal.')
+    summary_parser.set_defaults(func=printSummary)
+
     tag_parser = subparsers.add_parser('tag',
                                       help='Print entries for a given tag.')
     tag_parser.add_argument('tag',
@@ -70,6 +74,10 @@ def addEntry(args,dateDict):
 
 def printTags(args,dateDict):
     wj.printTags(dateDict)
+    return
+
+def printSummary(args,dateDict):
+    wj.printSummary(dateDict)
     return
 
 def printCal(args,dateDict):
