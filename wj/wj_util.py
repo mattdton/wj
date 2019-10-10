@@ -148,3 +148,22 @@ end dates are in datetime format."""
             printEntriesForDate(d,dateDict)
             print()
         d+=delta
+
+def printTSV(dateDict):
+    """Output all of the entries as a tab separated file."""
+    tags = _countTags(dateDict)
+    print("date\tentry",end='')
+    for tag in tags:
+        print('\t'+str(tag),end='')
+    print()
+    for date in sorted(dateDict.keys()):
+        for (entry,entrytags) in dateDict[date]:
+            print(date.isoformat(),end='')
+            print('\t'+str(entry),end='')
+            for t in tags:
+                if t in entrytags:
+                    print('\t'+"1",end='')
+                else:
+                    print('\t'+"0",end='')
+            print()
+    return

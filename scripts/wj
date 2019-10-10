@@ -64,6 +64,10 @@ def parse_args():
                                              help='Print entries for yesterday.')
     yesterday_parser.set_defaults(func=printYesterdayEntries)
 
+    tsv_parser = subparsers.add_parser('tsv',
+                                       help='Output the journal in tsv format.')
+    tsv_parser.set_defaults(func=printTSV)
+
     args = parser.parse_args()
     return args
 
@@ -107,8 +111,12 @@ def printYesterdayEntries(args,dateDict):
     wj.printEntriesForDate(date,dateDict)
     return
 
+def printTSV(args,dateDict):
+    wj.printTSV(dateDict)
+    return
+
 def main():
-    print('Opening %s'%fname)
+    print('Opening %s'%fname,file=sys.stderr)
     dateDict = wj.readFile(fname)
 
     args = parse_args()
