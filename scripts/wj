@@ -45,7 +45,13 @@ def parse_args():
 
 
     recent_parser = subparsers.add_parser('recent',
-                                          help='Print entries for last fortnight.')
+                                         help='Print entries for last fortnight.')
+    recent_parser.add_argument('tag',
+                               action='store',
+                               nargs='?',
+                               type=str,
+                               help='Optional argument.',
+                               default=None)
     recent_parser.set_defaults(func=printRecent)
 
     effort_parser = subparsers.add_parser('effort',

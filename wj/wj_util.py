@@ -1,9 +1,7 @@
 import re
 import datetime
 from collections import Counter
-from pint import UnitRegistry
 import wj.cal
-_ureg = UnitRegistry()
 
 def _getTagsFromEntry(string):
     tags = string.replace(' ','').lstrip('@').split('@')
@@ -116,6 +114,8 @@ def printCal(tag,dateDict):
 
 def printTotalEffort(tag,dateDict):
     """Print the total effort put into the task with a given tag."""
+    from pint import UnitRegistry
+    _ureg = UnitRegistry()
     total = None
     for date,val in dateDict.items():
         for entry,tags in val:
